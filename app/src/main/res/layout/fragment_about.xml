@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF0F5">
+
+    <!-- HEADER (TIDAK IKUT SCROLL) -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:gravity="center"
+        android:text="Tentang Aplikasi"
+        android:textSize="20sp"
+        android:textColor="#212121"
+        android:fontFamily="sans-serif-black"
+        android:background="#FFFFFF"
+        android:letterSpacing="0.05"
+        android:elevation="4dp"/>
+
+    <!-- SCROLL AREA -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- CARD DESKRIPSI -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#EEEEEE"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- FOTO DESKRIPSI -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginBottom="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/foto_tentang"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                    <!-- JUDUL -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STRAWBERRY LEAF DETECTION"
+                        android:textColor="#E91E63"
+                        android:textSize="12sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.05"/>
+
+                    <!-- ISI -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Aplikasi deteksi penyakit tanaman strawberry berbasis Artificial Intelligence. Menggunakan algoritma CNN untuk memberikan hasil diagnosis yang cepat dan akurat langsung dari genggaman Anda."
+                        android:textColor="#4A4A4A"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="6dp"
+                        android:justificationMode="inter_word"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CARD PENGEMBANG -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#EEEEEE"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="24dp">
+
+                    <!-- FOTO PENGEMBANG -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:padding="2dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/foto_pengembang"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        app:strokeColor="#FCE4EC"
+                        app:strokeWidth="2dp" />
+
+                    <!-- TEXT BARU -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PENGEMBANG APLIKASI"
+                        android:textColor="#E91E63"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.05"/>
+
+                    <!-- NAMA -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mutia Nursamsiah"
+                        android:textColor="#212121"
+                        android:textSize="18sp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-medium"/>
+
+                    <!-- JURUSAN -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teknik Informatika"
+                        android:textColor="#757575"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"/>
+
+                    <!-- UNIVERSITAS -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Universitas Kuningan"
+                        android:textColor="#757575"
+                        android:textSize="14sp"/>
+
+                    <!-- GARIS -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="16dp"
+                        android:background="#F5F5F5"/>
+
+                    <!-- EMAIL -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="mutianursamsiah@gmail.com"
+                        android:textColor="#E91E63"
+                        android:textSize="13sp"
+                        android:fontFamily="sans-serif-medium"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

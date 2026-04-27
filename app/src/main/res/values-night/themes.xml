@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.DeteksiStrawberry" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- PRIMARY PINK -->
+        <item name="colorPrimary">#E91E63</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- SECONDARY (TURUNAN PINK) -->
+        <item name="colorSecondary">#E91E63</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- BACKGROUND SOFT -->
+        <item name="android:colorBackground">#FFF0F5</item>
+
+        <!-- STATUS BAR -->
+        <item name="android:statusBarColor">#E91E63</item>
+
+        <!-- ICON STATUS BAR (PUTIH) -->
+        <item name="android:windowLightStatusBar">false</item>
+
+    </style>
+
+</resources>

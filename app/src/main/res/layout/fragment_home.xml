@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF0F5"> <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Deteksi Penyakit"
+    android:textSize="20sp"
+    android:fontFamily="sans-serif-black"
+    android:letterSpacing="0.05"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="#FFFFFF"
+    android:elevation="4dp"
+    android:textColor="#212121"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#E0E0E0">
+
+                    <androidx.camera.view.PreviewView
+                        android:id="@+id/cameraPreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/imgPreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/preview_image"/>
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Sumber Gambar"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="12dp"
+                android:textSize="14sp"
+                android:textColor="#4A4A4A"
+                android:fontFamily="sans-serif-medium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCamera"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="Kamera"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="16dp"
+                    app:strokeColor="#E91E63"
+                    app:rippleColor="#1AE91E63"
+                    app:icon="@android:drawable/ic_menu_camera"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGallery"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="Galeri"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp"
+                    app:cornerRadius="16dp"
+                    app:strokeColor="#E91E63"
+                    app:icon="@android:drawable/ic_menu_gallery"/>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRealtime"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mode Realtime"
+                android:textAllCaps="false"
+                android:textColor="#E91E63"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                app:cornerRadius="16dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="12dp"
+        app:strokeWidth="0dp"
+        app:cardCornerRadius="0dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAnalisis"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Analisis Sekarang"
+            android:fontFamily="sans-serif-medium"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"
+            app:cornerRadius="18dp"
+            app:backgroundTint="#E91E63"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

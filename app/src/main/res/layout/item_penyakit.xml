@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="20dp"
+    app:strokeColor="#EEEEEE"
+    app:strokeWidth="1dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- IMAGE -->
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"/>
+
+        <!-- JUDUL -->
+        <TextView
+            android:id="@+id/tvJudul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Judul"
+            android:textColor="#E91E63"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <!-- DESKRIPSI -->
+        <TextView
+            android:id="@+id/tvDeskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi..."
+            android:textSize="14sp"
+            android:textColor="#4A4A4A"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"/>
+
+        <!-- DETAIL -->
+        <LinearLayout
+            android:id="@+id/layoutDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="12dp">
+
+            <!-- GARIS -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"
+                android:layout_marginVertical="8dp"/>
+
+            <!-- GEJALA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gejala"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Contoh gejala..."
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="#4A4A4A"/>
+
+            <!-- PENYEBAB -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Penyebab"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Contoh penyebab..."
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="#4A4A4A"/>
+
+            <!-- PENANGANAN -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Penanganan"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Contoh penanganan..."
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="#4A4A4A"/>
+
+        </LinearLayout>
+
+        <!-- BUTTON -->
+        <TextView
+            android:id="@+id/tvToggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selengkapnya"
+            android:textColor="#2196F3"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
