@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "608338421379",
-    "project_id": "deteksistrawberry",
-    "storage_bucket": "deteksistrawberry.firebasestorage.app"
+    "project_number": "689527466759",
+    "project_id": "strawberry-detection-bb1e2",
+    "storage_bucket": "strawberry-detection-bb1e2.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:608338421379:android:5aeb6d70fdaab6ed515db6",
+        "mobilesdk_app_id": "1:689527466759:android:3fd5d15f75add2374b73a2",
         "android_client_info": {
           "package_name": "com.mutia.deteksistrawberry"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAfI9JQ4_dmixBAn8Jvwxu_V_8Tr8KJemU"
+          "current_key": "AIzaSyCGcWieRslFZLUFH0b8KZs8q4WfYh_nTVI"
         }
       ],
       "services": {

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
@@ -89,7 +90,31 @@ class home : Fragment() {
         // 🔍 Analisis
         btnAnalisis.setOnClickListener {
             if (imgPreview.drawable != null) {
-                Toast.makeText(requireContext(), "Siap analisis gambar", Toast.LENGTH_SHORT).show()
+                // bitmap image
+                val bitmap = (imgPreview.drawable as? BitmapDrawable)?.bitmap
+
+                if (bitmap != null) {
+                    // Simpan ke holder
+                    AnalysisDataHolder.imageBitmap = bitmap
+                    AnalysisDataHolder.isHistory = false
+                    
+                    // Buat hasil dummy (Nanti diganti dengan hasil TFLite sesungguhnya)
+                    val dummyResult = AnalysisResult(
+                        diseaseName = "Leaf Scorch",
+                        accuracy = 0.95f,
+                        date = "28 Maret 2026",
+                        symptoms = "Bercak coklat kemerahan pada tepi daun yang perlahan mengering dan menggulung.",
+                        cause = "Jamur Diplocarpon earliana yang berkembang di kondisi lembab.",
+                        treatment = "Potong bagian daun yang sakit, kurangi kelembapan, dan semprot fungisida.",
+                        imageBitmap = bitmap,
+                        boundingBox = null
+                    )
+                    
+                    AnalysisDataHolder.analysisResult = dummyResult
+
+                    val intent = Intent(requireContext(), DetailAnalisisActivity::class.java)
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(requireContext(), "Ambil gambar dulu!", Toast.LENGTH_SHORT).show()
             }

@@ -73,7 +73,7 @@
 
         <!-- DELETE BUTTON -->
         <ImageView
-            android:id="@+id/btnDelete"
+            android:id="@+id/btnDeleteHistory"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="top|end"
