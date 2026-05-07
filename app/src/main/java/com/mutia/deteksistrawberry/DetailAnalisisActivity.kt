@@ -46,7 +46,11 @@ class DetailAnalisisActivity : ComponentActivity() {
                                     Locale.getDefault()
                                 ).format(Date()),
                                 imageUrl = imagePath,
-                                confidence = result.accuracy
+                                confidence = result.accuracy,
+                                boxLeft = result.boundingBox?.left ?: 0f,
+                                boxTop = result.boundingBox?.top ?: 0f,
+                                boxRight = result.boundingBox?.right ?: 0f,
+                                boxBottom = result.boundingBox?.bottom ?: 0f
                             )
 
                             repository.saveHistory("user_dummy", history)

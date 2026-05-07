@@ -1,0 +1,4 @@
+Healthy
+Leaf_Blight
+Leaf_Scorch
+Leaf_Spot

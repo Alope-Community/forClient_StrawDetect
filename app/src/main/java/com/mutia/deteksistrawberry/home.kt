@@ -27,6 +27,7 @@ class home : Fragment() {
     private lateinit var imgPreview: ImageView
     private lateinit var cameraPreview: PreviewView
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var yoloDetector: YoloDetector
 
     private var isRealtimeActive = false
 
@@ -60,6 +61,7 @@ class home : Fragment() {
 
         imgPreview = view.findViewById(R.id.imgPreview)
         cameraPreview = view.findViewById(R.id.cameraPreview)
+        yoloDetector = YoloDetector(requireContext())
 
         val btnCamera = view.findViewById<MaterialButton>(R.id.btnCamera)
         val btnGallery = view.findViewById<MaterialButton>(R.id.btnGallery)
@@ -90,30 +92,39 @@ class home : Fragment() {
         // 🔍 Analisis
         btnAnalisis.setOnClickListener {
             if (imgPreview.drawable != null) {
-                // bitmap image
                 val bitmap = (imgPreview.drawable as? BitmapDrawable)?.bitmap
 
                 if (bitmap != null) {
-                    // Simpan ke holder
-                    AnalysisDataHolder.imageBitmap = bitmap
-                    AnalysisDataHolder.isHistory = false
+                    // Pre-process bitmap: YOLOv8 usually works best on square images.
+                    // However, we pass the original bitmap and let YoloDetector handle resizing.
+                    val results = yoloDetector.detect(bitmap)
                     
-                    // Buat hasil dummy (Nanti diganti dengan hasil TFLite sesungguhnya)
-                    val dummyResult = AnalysisResult(
-                        diseaseName = "Leaf Scorch",
-                        accuracy = 0.95f,
-                        date = "28 Maret 2026",
-                        symptoms = "Bercak coklat kemerahan pada tepi daun yang perlahan mengering dan menggulung.",
-                        cause = "Jamur Diplocarpon earliana yang berkembang di kondisi lembab.",
-                        treatment = "Potong bagian daun yang sakit, kurangi kelembapan, dan semprot fungisida.",
-                        imageBitmap = bitmap,
-                        boundingBox = null
-                    )
-                    
-                    AnalysisDataHolder.analysisResult = dummyResult
+                    if (results.isNotEmpty()) {
+                        val topResult = results.maxByOrNull { it.score }!!
+                        
+                        // Get disease info from DiseaseData
+                        val info = DiseaseData.getInfo(topResult.label.replace("_", " "))
+                        
+                        val analysisResult = AnalysisResult(
+                            diseaseName = topResult.label,
+                            accuracy = topResult.score,
+                            date = java.text.SimpleDateFormat("dd MMMM yyyy", java.util.Locale.getDefault()).format(java.util.Date()),
+                            symptoms = info.first,
+                            cause = info.second,
+                            treatment = info.third,
+                            imageBitmap = bitmap,
+                            boundingBox = topResult.boundingBox
+                        )
+                        
+                        AnalysisDataHolder.imageBitmap = bitmap
+                        AnalysisDataHolder.isHistory = false
+                        AnalysisDataHolder.analysisResult = analysisResult
 
-                    val intent = Intent(requireContext(), DetailAnalisisActivity::class.java)
-                    startActivity(intent)
+                        val intent = Intent(requireContext(), DetailAnalisisActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(requireContext(), "Tidak ada objek terdeteksi", Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else {
                 Toast.makeText(requireContext(), "Ambil gambar dulu!", Toast.LENGTH_SHORT).show()
@@ -172,5 +183,6 @@ class home : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+        yoloDetector.close()
     }
 }

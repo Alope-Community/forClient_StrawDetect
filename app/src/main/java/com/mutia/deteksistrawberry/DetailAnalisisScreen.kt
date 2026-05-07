@@ -23,6 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import android.graphics.Paint
+import android.graphics.Typeface
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -125,17 +129,30 @@ fun DetailAnalisisScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(20.dp)),
-                            contentScale = ContentScale.Crop
+                            contentScale = ContentScale.Fit // Change to Fit for better box alignment
                         )
 
                         // bounding box
                         result.boundingBox?.let { rect ->
                             Canvas(modifier = Modifier.fillMaxSize()) {
-                                val left = rect.left * size.width
-                                val top = rect.top * size.height
-                                val right = rect.right * size.width
-                                val bottom = rect.bottom * size.height
+                                // For ContentScale.Fit, we need to calculate the actual image bounds
+                                val bitmapWidth = result.imageBitmap.width.toFloat()
+                                val bitmapHeight = result.imageBitmap.height.toFloat()
+                                val containerWidth = size.width
+                                val containerHeight = size.height
 
+                                val scale = minOf(containerWidth / bitmapWidth, containerHeight / bitmapHeight)
+                                val drawWidth = bitmapWidth * scale
+                                val drawHeight = bitmapHeight * scale
+                                val offsetX = (containerWidth - drawWidth) / 2
+                                val offsetY = (containerHeight - drawHeight) / 2
+
+                                val left = offsetX + rect.left * drawWidth
+                                val top = offsetY + rect.top * drawHeight
+                                val right = offsetX + rect.right * drawWidth
+                                val bottom = offsetY + rect.bottom * drawHeight
+
+                                // Draw Bounding Box
                                 drawRect(
                                     color = Color.Red,
                                     topLeft = androidx.compose.ui.geometry.Offset(left, top),
@@ -145,6 +162,37 @@ fun DetailAnalisisScreen(
                                     ),
                                     style = Stroke(width = 4.dp.toPx())
                                 )
+
+                                // Draw Label background
+                                val text = "${result.diseaseName} ${(result.accuracy * 100).toInt()}%"
+                                drawContext.canvas.nativeCanvas.apply {
+                                    val paint = Paint().apply {
+                                        color = Color.Red.toArgb()
+                                        textSize = 40f
+                                        typeface = Typeface.DEFAULT_BOLD
+                                    }
+                                    val textWidth = paint.measureText(text)
+                                    val textHeight = 45f
+
+                                    // Draw rect for text
+                                    drawRect(
+                                        color = Color.Red,
+                                        topLeft = androidx.compose.ui.geometry.Offset(left, maxOf(0f, top - textHeight)),
+                                        size = androidx.compose.ui.geometry.Size(textWidth + 20f, textHeight)
+                                    )
+
+                                    // Draw text
+                                    drawText(
+                                        text,
+                                        left + 10f,
+                                        maxOf(textHeight - 10f, top - 10f),
+                                        Paint().apply {
+                                            color = android.graphics.Color.WHITE
+                                            textSize = 40f
+                                            typeface = Typeface.DEFAULT_BOLD
+                                        }
+                                    )
+                                }
                             }
                         }
                     } else {

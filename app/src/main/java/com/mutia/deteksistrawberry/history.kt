@@ -56,6 +56,13 @@ class History : Fragment() {
             }
         }) { model ->
             val info = DiseaseData.getInfo(model.namaPenyakit)
+            
+            val boundingBox = if (model.boxRight > 0) {
+                android.graphics.RectF(model.boxLeft, model.boxTop, model.boxRight, model.boxBottom)
+            } else {
+                null
+            }
+
             val result = AnalysisResult(
                 diseaseName = model.namaPenyakit,
                 accuracy = model.confidence,
@@ -66,7 +73,7 @@ class History : Fragment() {
                 imageBitmap = model.imageUrl.let { path ->
                     BitmapFactory.decodeFile(path)
                 },
-                boundingBox = null
+                boundingBox = boundingBox
             )
 
             AnalysisDataHolder.analysisResult = result
