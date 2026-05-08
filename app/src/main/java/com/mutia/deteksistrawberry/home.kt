@@ -27,7 +27,7 @@ class home : Fragment() {
     private lateinit var imgPreview: ImageView
     private lateinit var cameraPreview: PreviewView
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var yoloDetector: YoloDetector
+    private lateinit var CNNDetector: CNNDetector
 
     private var isRealtimeActive = false
 
@@ -61,7 +61,7 @@ class home : Fragment() {
 
         imgPreview = view.findViewById(R.id.imgPreview)
         cameraPreview = view.findViewById(R.id.cameraPreview)
-        yoloDetector = YoloDetector(requireContext())
+        CNNDetector = CNNDetector(requireContext())
 
         val btnCamera = view.findViewById<MaterialButton>(R.id.btnCamera)
         val btnGallery = view.findViewById<MaterialButton>(R.id.btnGallery)
@@ -97,7 +97,7 @@ class home : Fragment() {
                 if (bitmap != null) {
                     // Pre-process bitmap: YOLOv8 usually works best on square images.
                     // However, we pass the original bitmap and let YoloDetector handle resizing.
-                    val results = yoloDetector.detect(bitmap)
+                    val results = CNNDetector.detect(bitmap)
                     
                     if (results.isNotEmpty()) {
                         val topResult = results.maxByOrNull { it.score }!!
@@ -183,6 +183,6 @@ class home : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
-        yoloDetector.close()
+        CNNDetector.close()
     }
 }

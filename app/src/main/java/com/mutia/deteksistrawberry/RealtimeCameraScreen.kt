@@ -1,6 +1,5 @@
 package com.mutia.deteksistrawberry
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.Paint
@@ -38,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleOwner
 import java.util.concurrent.Executors
 
 @Composable
@@ -47,14 +45,14 @@ fun RealtimeCameraScreen(onBack: () -> Unit) {
     val lifecycleOwner = LocalLifecycleOwner.current
     var result by remember { mutableStateOf<AnalysisResult?>(null) }
     val executor = remember { Executors.newSingleThreadExecutor() }
-    val yoloDetector = remember { YoloDetector(context) }
+    val CNNDetector = remember { CNNDetector(context) }
     var cameraProvider by remember { mutableStateOf<ProcessCameraProvider?>(null) }
 
     DisposableEffect(lifecycleOwner) {
         onDispose {
             cameraProvider?.unbindAll()
             executor.shutdownNow()
-            yoloDetector.close()
+            CNNDetector.close()
         }
     }
 
@@ -87,7 +85,7 @@ fun RealtimeCameraScreen(onBack: () -> Unit) {
                                 val bitmap = imageProxy.toBitmap()
                                 val rotatedBitmap = rotateBitmap(bitmap, imageProxy.imageInfo.rotationDegrees.toFloat())
                                 
-                                val results = yoloDetector.detect(rotatedBitmap)
+                                val results = CNNDetector.detect(rotatedBitmap)
                                 if (results.isNotEmpty()) {
                                     val topResult = results.maxByOrNull { it.score }!!
                                     val info = DiseaseData.getInfo(topResult.label.replace("_", " "))

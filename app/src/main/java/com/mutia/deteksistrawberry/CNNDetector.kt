@@ -13,7 +13,7 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.ResizeOp.ResizeMethod
 
-class YoloDetector(private val context: Context) {
+class CNNDetector(private val context: Context) {
 
     private var interpreter: Interpreter? = null
     private var labels = listOf<String>()
@@ -40,23 +40,17 @@ class YoloDetector(private val context: Context) {
         }
 
         val outputShape = interpreter!!.getOutputTensor(0).shape()
-        Log.d("YoloDetector", "Output Shape: ${outputShape.contentToString()}")
+        Log.d("CNNDetector", "Output Shape: ${outputShape.contentToString()}")
         
         val loadedLabels = FileUtil.loadLabels(context, "labels.txt")
-        Log.d("YoloDetector", "Loaded Labels: $loadedLabels")
+        Log.d("CNNDetector", "Loaded Labels: $loadedLabels")
 
         val labelCount = loadedLabels.size
-
-        // YOLOv8 output is usually [1, 4 + numClasses, numBoxes]
-        // YOLOv5 output is usually [1, numBoxes, 5 + numClasses]
-        // Classification output is usually [1, numClasses]
         
         if (outputShape.size == 3) {
             val d1 = outputShape[1]
             val d2 = outputShape[2]
-            
-            // For YOLO, one dimension is usually numBoxes (e.g. 8400) 
-            // and the other is attributes (coords + classes)
+
             if (d1 < d2) {
                 numClasses = if (d1 > 4) d1 - 4 else d1
                 numOutput = d2
@@ -82,7 +76,7 @@ class YoloDetector(private val context: Context) {
 
         labels = loadedLabels
         // If the model has more classes than the label file, we'll map them later
-        Log.d("YoloDetector", "Final numClasses: $numClasses, numOutput: $numOutput, isClassification: $isClassification")
+        Log.d("CNNDetector", "Final numClasses: $numClasses, numOutput: $numOutput, isClassification: $isClassification")
     }
 
     @Synchronized
@@ -200,7 +194,7 @@ class YoloDetector(private val context: Context) {
     }
 
     private fun nms(detections: List<Detection>): List<Detection> {
-        Log.d("YoloDetector", "NMS Input: ${detections.size}")
+        Log.d("CNNDetector", "NMS Input: ${detections.size}")
         val sortedDetections = detections.sortedByDescending { it.score }
         val selectedDetections = mutableListOf<Detection>()
         val active = BooleanArray(sortedDetections.size) { true }
@@ -215,7 +209,7 @@ class YoloDetector(private val context: Context) {
                 }
             }
         }
-        Log.d("YoloDetector", "NMS Output: ${selectedDetections.size}")
+        Log.d("CNNDetector", "NMS Output: ${selectedDetections.size}")
         return selectedDetections
     }
 
