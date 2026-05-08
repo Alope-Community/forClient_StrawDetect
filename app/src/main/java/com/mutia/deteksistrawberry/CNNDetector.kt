@@ -25,7 +25,7 @@ class CNNDetector(private val context: Context) {
     private var isClassification = false
 
     init {
-        val model = FileUtil.loadMappedFile(context, "strawberry_detecor.tflite")
+        val model = FileUtil.loadMappedFile(context, "strawberry_detector.tflite")
         val options = Interpreter.Options()
         interpreter = Interpreter(model, options)
 
@@ -42,7 +42,7 @@ class CNNDetector(private val context: Context) {
         val outputShape = interpreter!!.getOutputTensor(0).shape()
         Log.d("CNNDetector", "Output Shape: ${outputShape.contentToString()}")
         
-        val loadedLabels = FileUtil.loadLabels(context, "labels.txt")
+        val loadedLabels = FileUtil.loadLabels(context, "labelsOLD.txt")
         Log.d("CNNDetector", "Loaded Labels: $loadedLabels")
 
         val labelCount = loadedLabels.size
