@@ -19,25 +19,57 @@ class info : Fragment() {
 
         // 🔥 DATA PENYAKIT
         val data = listOf(
+
             Penyakit(
                 "Leaf Spot",
                 "Penyakit bercak daun yang disebabkan oleh jamur Mycosphaerella fragariae.",
-                R.drawable.foto_tentang
+
+                "• Muncul bercak kecil berwarna ungu pada daun.",
+
+                "• Disebabkan oleh jamur Mycosphaerella fragariae.",
+
+                "• Gunakan fungisida dan buang daun yang terinfeksi.",
+
+                R.drawable.gambar_spot
             ),
+
             Penyakit(
                 "Leaf Blight",
                 "Penyakit hawar daun yang menyebabkan daun mengering dan mati.",
-                R.drawable.foto_tentang
+
+                "• Daun berubah coklat dan mengering.",
+
+                "• Disebabkan oleh infeksi jamur pada daun.",
+
+                "• Pangkas daun yang terinfeksi dan gunakan fungisida.",
+
+                R.drawable.gambar_blight
             ),
+
             Penyakit(
                 "Leaf Scorch",
                 "Penyakit yang menyebabkan daun terlihat seperti terbakar.",
-                R.drawable.foto_tentang
+
+                "• Tepi daun menghitam seperti terbakar.",
+
+                "• Disebabkan oleh kondisi lingkungan dan infeksi penyakit.",
+
+                "• Jaga kelembapan tanaman dan lakukan perawatan rutin.",
+
+                R.drawable.gambar_scorch
             ),
+
             Penyakit(
                 "Healthy",
                 "Tanaman dalam kondisi sehat tanpa gejala penyakit.",
-                R.drawable.foto_tentang
+
+                "• Daun berwarna hijau segar tanpa bercak.",
+
+                "• Tidak terdapat infeksi penyakit pada tanaman.",
+
+                "• Lakukan perawatan dan penyiraman secara rutin.",
+
+                R.drawable.gambar_sehat
             )
         )
 

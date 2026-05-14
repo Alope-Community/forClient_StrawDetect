@@ -75,6 +75,7 @@
                 android:textColor="#000000"/>
 
             <TextView
+                android:id="@+id/tvGejala"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="• Contoh gejala..."
@@ -94,6 +95,7 @@
                 android:textColor="#000000"/>
 
             <TextView
+                android:id="@+id/tvPenyebab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="• Contoh penyebab..."
@@ -113,6 +115,7 @@
                 android:textColor="#000000"/>
 
             <TextView
+                android:id="@+id/tvPenanganan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="• Contoh penanganan..."

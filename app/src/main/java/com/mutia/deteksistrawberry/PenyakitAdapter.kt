@@ -13,6 +13,9 @@ class PenyakitAdapter(private val list: List<Penyakit>) :
         val img: ImageView = itemView.findViewById(R.id.img)
         val tvJudul: TextView = itemView.findViewById(R.id.tvJudul)
         val tvDeskripsi: TextView = itemView.findViewById(R.id.tvDeskripsi)
+        val tvGejala: TextView = itemView.findViewById(R.id.tvGejala)
+        val tvPenyebab: TextView = itemView.findViewById(R.id.tvPenyebab)
+        val tvPenanganan: TextView = itemView.findViewById(R.id.tvPenanganan)
         val tvToggle: TextView = itemView.findViewById(R.id.tvToggle)
         val layoutDetail: LinearLayout = itemView.findViewById(R.id.layoutDetail)
     }
@@ -32,6 +35,9 @@ class PenyakitAdapter(private val list: List<Penyakit>) :
         holder.tvJudul.text = item.nama
         holder.tvDeskripsi.text = item.deskripsi
         holder.img.setImageResource(item.gambar)
+        holder.tvGejala.text = item.gejala
+        holder.tvPenyebab.text = item.penyebab
+        holder.tvPenanganan.text = item.penanganan
 
         // STATE EXPAND / COLLAPSE
         if (item.isExpanded) {
